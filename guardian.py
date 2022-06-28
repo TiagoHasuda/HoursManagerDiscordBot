@@ -47,8 +47,11 @@ def write(name,content,refDate=''):
 def startString():
   return Constants.START + Constants.SEPARATOR + getTime()
 
-def stopString():
-  return Constants.STOP + Constants.SEPARATOR + getTime()
+def stopString(notToday = False):
+  if not notToday:
+    return Constants.STOP + Constants.SEPARATOR + getTime()
+  else:
+    return Constants.STOP + Constants.SEPARATOR + '23:59:59'
 
 def pauseString():
   return Constants.PAUSE + Constants.SEPARATOR + getTime()
@@ -100,7 +103,7 @@ def summary(name,date):
   if checkRunning(name) and date == getToday():
     returnString += 'Still running...report will be incomplete\n'
   elif checkRunning(name,date):
-    write(name,stopString(),date)
+    write(name,stopString(True),date)
   returnString += '```\n'
   dateFile = open(userPath, 'r')
   fullFile = dateFile.readlines()
@@ -126,7 +129,7 @@ def summary(name,date):
         end = datetime.strptime(splits[1], timeFormat)
         total += end - start
         allTotal += end - start
-        pause = True
+        paused = True
       case Constants.STOP:
         end = datetime.strptime(splits[1], timeFormat)
         total += end - start
