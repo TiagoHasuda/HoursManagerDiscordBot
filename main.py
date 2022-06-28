@@ -51,6 +51,8 @@ async def on_message(message):
       res = guardian.summary(userTag, refDate)
       await message.channel.send(res)
     except Exception as e:
-      await message.channel.sned('Error getting summary! ' + str(e))
+      await message.channel.send('Error getting summary! ' + str(e))
+  if message.content.startswith(botTag + 'help'):
+    await message.channel.send('```- !start: start counting hours\n- !stop: stop counting hours\n- !restart: stop and start again\n- !message: save a message\n- !summary: returns a summary from today\n- !summary ddMMyyyy: returns a summary for the given date```')
 
 client.run(os.getenv('TOKEN'))
