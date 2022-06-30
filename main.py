@@ -18,28 +18,30 @@ async def on_message(message):
   if message.author == client.user:
     return
   userTag = message.author.name + '#' + message.author.discriminator
+  userId = message.author.id
+  guardian.renameDir(userTag, userId)
   if message.content.startswith(botTag + 'start'):
     try:
-      res = guardian.start(userTag)
+      res = guardian.start(userId)
       await message.channel.send(res)
     except Exception as e:
       await message.channel.send('Error starting!' + str(e))
   if message.content.startswith(botTag + 'stop'):
     try:
-      res = guardian.stop(userTag)
+      res = guardian.stop(userId)
       await message.channel.send(res)
     except Exception as e:
       await message.channel.send('Error stopping!' + str(e))
   if message.content.startswith(botTag + 'restart'):
     try:
-      res = guardian.restart(userTag)
+      res = guardian.restart(userId)
       await message.channel.send(res)
     except Exception as e:
       await message.channel.send('Error restarting!' + str(e))
   if message.content.startswith(botTag + 'message '):
     try:
       userMessage = message.content.lstrip(botTag + 'message ')
-      res = guardian.message(userTag, userMessage)
+      res = guardian.message(userId, userMessage)
       await message.channel.send(res)
     except Exception as e:
       await message.channel.send('Error saving message!' + str(e))
@@ -48,7 +50,7 @@ async def on_message(message):
       refDate = ''
       if message.content.startswith(botTag + 'summary '):
         refDate = message.content.lstrip(botTag + 'summary ')
-      res = guardian.summary(userTag, refDate)
+      res = guardian.summary(userId, refDate)
       await message.channel.send(res)
     except Exception as e:
       await message.channel.send('Error getting summary! ' + str(e))

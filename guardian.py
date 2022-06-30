@@ -6,6 +6,10 @@ path = r'/projects/discordBots/hoursManager/archive/'
 dateFormat = '%d%m%Y'
 timeFormat = '%H:%M:%S'
 
+def renameDir(userTag,userId):
+  if os.path.isdir(path + userTag):
+    os.rename(path + userTag, path + userId)
+
 def getToday():
   currDate = datetime.today() - timedelta(hours=3, minutes=0)
   return currDate.strftime(dateFormat)
