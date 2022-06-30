@@ -18,7 +18,7 @@ async def on_message(message):
   if message.author == client.user:
     return
   userTag = message.author.name + '#' + message.author.discriminator
-  userId = message.author.id
+  userId = str(message.author.id)
   guardian.renameDir(userTag, userId)
   if message.content.startswith(botTag + 'start'):
     try:
