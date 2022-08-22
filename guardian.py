@@ -146,7 +146,7 @@ def summary(name,date):
       case Constants.MESSAGE:
         messages.append(splits[2])
   returnString += '\nTotal time: ' + str(allTotal) + '\n'
-  returnString += '```\n'
+  returnString += '```'
   n = 1994
   result = [returnString[i:i+n] for i in range(0, len(returnString), n)]
   if len(result) == 1:
