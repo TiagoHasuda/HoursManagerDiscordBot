@@ -151,9 +151,11 @@ def summary(name,date):
   result = [returnString[i:i+n] for i in range(0, len(returnString), n)]
   if len(result) == 1:
     return result
+  newResult = []
   for res in result:
     if not res.startswith('```'):
       res = '```' + res
     if not res.endswith('```'):
       res += '```'
-  return result
+    newResult.append(res)
+  return newResult
