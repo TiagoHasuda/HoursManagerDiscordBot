@@ -51,7 +51,8 @@ async def on_message(message):
       if message.content.startswith(botTag + 'summary '):
         refDate = message.content.lstrip(botTag + 'summary ')
       res = guardian.summary(userId, refDate)
-      await message.channel.send(res)
+      for msg in res:
+        await message.channel.send(msg)
     except Exception as e:
       await message.channel.send('Error getting summary! ' + str(e))
   if message.content.startswith(botTag + 'help'):

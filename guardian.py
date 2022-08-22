@@ -111,7 +111,6 @@ def summary(name,date):
   returnString += '```\n'
   dateFile = open(userPath, 'r')
   fullFile = dateFile.readlines()
-  curr = ''
   command = ''
   messages = []
   paused = False
@@ -148,4 +147,13 @@ def summary(name,date):
         messages.append(splits[2])
   returnString += '\nTotal time: ' + str(allTotal) + '\n'
   returnString += '```\n'
-  return returnString
+  n = 1994
+  result = [returnString[i:i+n] for i in range(0, len(returnString), n)]
+  if len(result) == 1:
+    return result
+  for res in result:
+    if not res.startswith('```'):
+      res = '```' + res
+    if not res.endswith('```'):
+      res += '```'
+  return result
