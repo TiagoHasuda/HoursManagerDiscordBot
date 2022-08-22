@@ -93,7 +93,8 @@ def message(name,message):
     return 'You need to run !start first'
   if not message:
     return 'Message empty, nothing done'
-  write(name, messageString(message))
+  for line in message.split('\n'):
+    write(name, messageString(line))
   return 'Message saved'
 
 def summary(name,date):
